@@ -8,7 +8,34 @@
     <link rel="stylesheet" type="text/css" href="./styles/main.css">
   </head>
   <body>
-    <h1>Test</h1>
+    <header>
+      <h1>Garage Bin</h1>
+      <div class="item-counter">
+        <button class="open-btn">Open</button>
+        <span class="item-count">Total: <span class="item-count--total"></span></span>
+        <span class="item-count">Sparkling: <span class="item-count--sparkling"></span></span>
+        <span class="item-count">Dusty: <span class="item-count--dusty"></span></span>
+        <span class="item-count">Rancid: <span class="item-count--rancid"></span></span>
+      </div>
+    </header>
+    <section class="main-content">
+      <section class="controls">
+        <form class="garage-form">
+          <input class="item-input--name" type="text" name="item" placeholder="Item"/>
+          <textarea class="item-input--reason" type="text" name="reason" placeholder="Reason"></textarea>
+          <select class="item-select" name="cleanliness">
+            <option value="select cleanliness">select cleanliness</option>
+            <option value="sparkling">sparkling</option>
+            <option value="dusty">dusty</option>
+            <option value="rancid">rancid</option>
+          </select>
+          <button class="add-item-btn" type="submit" name="button">Add item</button>
+        </form>
+      </section>
+      <section class="garage">
+        <img class="garage-door" src="./images/garage-door.png" alt="garage door">
+      </section>
+    </section>
     <script src='./scripts/jquery.js'></script>
     <script src='./scripts/app.js'></script>
   </body>
