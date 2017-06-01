@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path')
 
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
@@ -21,7 +23,13 @@ const validatePatch = (item) => {
 
 app.use(bodyParser.json());
 app.set('port', process.env.PORT || 3000);
+app.use(express.static('public'));
 
+app.get('/', (request, response) => {
+  fs.readFile(`${__dirname}/index.html`, (error, file) => {
+    response.send(file)
+  })
+})
 
 app.get('/api/v1/items', (request, response) => {
   database('garage').select()
