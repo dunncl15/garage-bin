@@ -10,6 +10,8 @@ header {
 
 header h1 {
   margin-right: auto;
+  display: flex;
+  align-items: center;
 }
 
 .item-counter {
@@ -60,19 +62,36 @@ header h1 {
   margin: 20px;
 }
 
-.open-btn {
-  display: block;
-  border: 2px solid green;
-  color: green;
+.open-btn,
+.close-btn {
   padding: 5px 10px;
+  margin: 0 10px;
   border-radius: 5px;
   background-color: transparent;
   width: 70px;
   cursor: pointer;
 }
 
+.open-btn {
+  display: block;
+  border: 2px solid green;
+  color: green;
+}
+
+.close-btn {
+  display: block;
+  border: 2px solid firebrick;
+  color: firebrick;
+}
+
 .open-btn:hover {
   background-color: green;
+  color: #fff;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  background-color: firebrick;
   color: #fff;
   font-weight: bold;
 }

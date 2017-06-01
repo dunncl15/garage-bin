@@ -114,5 +114,9 @@ $('.garage').on('change', '.update-cleanliness', function(e) {
 });
 
 $('.open-btn').on('click', function() {
-  $('.garage-door').toggleClass('open')
-})
+  $('.garage-door').addClass('open');
+});
+
+$('.close-btn').on('click', function() {
+  $('.garage-door').removeClass('open');
+});
