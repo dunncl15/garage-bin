@@ -16,7 +16,6 @@ const validatePost = (item) => {
 }
 
 const validatePatch = (item) => {
-  console.log(item);
   const itemProps = Object.keys(item);
   return (itemProps.includes('cleanliness') && itemProps.length === 1);
 }
@@ -59,13 +58,23 @@ app.patch('/api/v1/items/:id', (request, response) => {
   if (validatePatch(updatedItem)) {
     database('garage').where('id', id).update(updatedItem)
       .then(item => {
-        response.status(201).send('item has been updated.')
+        response.status(201).send('item has been updated.');
       })
       .catch(error => response.status(500).send({ error: error }))
     } else {
-      response.status(422).send({ error: 'Unprocessable entity.'})
+      response.status(422).send({ error: 'Unprocessable entity.'});
     };
 });
+
+app.delete('/api/v1/items/:id', (request, response) => {
+  const { id } = request.params;
+
+  database('garage').where('id', id).del().returning('id')
+  .then(item => {
+    response.status(204).send('item has been deleted.');
+  })
+  .catch(error => response.status(500).send({ error: error }));
+})
 
 app.listen(app.get('port'), () => {
   console.log(`server running on port ${app.get('port')}`);
