@@ -4,14 +4,19 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "knex": "^0.13.0",
     "pg": "^6.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
