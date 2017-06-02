@@ -45,6 +45,41 @@ const deleteItem = (id) => {
   .catch(error => console.log(error))
 }
 
+const sortItems = (sort) => {
+  fetch('/api/v1/items')
+  .then(response => response.json())
+  .then(items => sort(items))
+}
+
+const sortUp = (items) => {
+  const sorted = items.sort((a, b) => {
+    let itemA = a.item.toLowerCase();
+    let itemB = b.item.toLowerCase();
+    if (itemA < itemB) {
+      return -1;
+    }
+    if (itemA > itemB) {
+      return 1;
+    }
+  });
+  clearGarage();
+  appendItems(sorted);
+}
+const sortDown = (items) => {
+  const sorted = items.sort((a, b) => {
+    let itemA = a.item.toLowerCase();
+    let itemB = b.item.toLowerCase();
+    if (itemA < itemB) {
+      return 1;
+    }
+    if (itemA > itemB) {
+      return -1;
+    }
+  });
+  clearGarage();
+  appendItems(sorted);
+}
+
 const updateCounter = (items) => {
   const sparklingCount = items.filter(item => item.cleanliness === 'sparkling').length;
   const dustyCount = items.filter(item => item.cleanliness === 'dusty').length;
@@ -66,28 +101,34 @@ const clearGarage = () => {
   $('.garage').children('.item').remove();
 }
 
-getAllItems();
-
 const appendItems = (items) => {
   return items.map(item => {
     $('.garage').append(`
       <article class='item' id='${item.id}'>
-        <button class='delete-btn'>Delete</button>
-        <p>Item: ${item.item}</p>
+        <button class='delete-btn'>
+          <img class='delete' src='../images/delete.svg' alt='delete button'/>
+        </button>
+        <p class='item-name'>${item.item}</p>
         <div class='inner-content'>
-          <p>Reason: ${item.reason}</p>
-          <p class='cleanliness'>Cleanliness: ${item.cleanliness}</p>
-          <select class='update-cleanliness'>
-            <option value='update cleanliness'>Update cleanliness</option>
-            <option value='sparkling'>sparkling</option>
-            <option value='dusty'>dusty</option>
-            <option value='rancid'>rancid</option>
-          </select>
+          <p class='reason'>${item.reason}</p>
+          <p class='cleanliness'>${item.cleanliness}
+            <select class='update-cleanliness'>
+              <option value='update cleanliness'>Update cleanliness</option>
+              <option value='sparkling'>sparkling</option>
+              <option value='dusty'>dusty</option>
+              <option value='rancid'>rancid</option>
+            </select>
+          </p>
+          <img class='up-arrow' src='../images/up-arrow.svg' alt='up arrow' />
         </div>
       </article>
     `)
   })
 }
+
+// $(document).on('load', function() {
+  getAllItems();
+// })
 
 $('.add-item-btn').on('click', function(e) {
   e.preventDefault();
@@ -101,7 +142,6 @@ $('.add-item-btn').on('click', function(e) {
 });
 
 $('.garage').on('click', '.delete-btn', function() {
-  console.log('delete');
   const id = $(this).closest('.item').attr('id');
   deleteItem(id);
 })
@@ -120,3 +160,19 @@ $('.open-btn').on('click', function() {
 $('.close-btn').on('click', function() {
   $('.garage-door').removeClass('open');
 });
+
+$('.sort-btn').on('click', function() {
+  if ($(this).text() === 'Sort A') {
+    sortItems(sortUp);
+  } else {
+    sortItems(sortDown);
+  }
+});
+
+$('.garage').on('click', '.item-name', function() {
+  $(this).next('.inner-content').addClass('expand');
+})
+
+$('.garage').on('click', '.up-arrow', function() {
+  $(this).closest('.inner-content').removeClass('expand');
+})
