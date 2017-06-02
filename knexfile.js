@@ -14,7 +14,17 @@ module.exports = {
     }
   },
 
-
+  test: {
+    client: 'pg',
+    connection: 'postgres://localhost/garage_test',
+    useNullAsDefault: true,
+    migrations: {
+      directory: './db/migrations',
+    },
+    seeds: {
+      directory: './db/seeds/test',
+    },
+  },
 
   production: {
     client: 'postgresql',
