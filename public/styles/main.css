@@ -1,69 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Ultra|Open+Sans');
+
+
 * {
   box-sizing: border-box;
 }
 
+body {
+  background-color: #2E5266;
+  font-family: 'Open Sans';
+  font-size: 16px;
+}
+
+/*********************
+      HEADER
+*********************/
+
 header {
   display: flex;
   align-items: center;
-  padding: 0 2.5%;
+  justify-content: space-between;
+  padding: 2.5%;
+  background-color: #2E5266;
+  color: #DBE9EE;
 }
 
-header h1 {
-  margin-right: auto;
+h1 {
+  background-color: #2E5266;
+  color: #DBE9EE;
+  font-family: 'Ultra';
+  text-align: center;
+  padding: 25px 0;
+  font-size: 220%;
+}
+
+.header-btns {
   display: flex;
   align-items: center;
 }
-
-.item-counter {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin: 10px;
-}
-
-.item-count {
-  display: block;
-  margin: 0 10px;
-}
-
-.main-content {
-  display: flex;
-  padding: 0 2.5%;
-}
-
-.garage {
-  position: relative;
-  width: 50%;
-  margin: 20px;
-  border: 25px solid grey;
-  border-bottom: none;
-  border-radius: 3px;
-  height: 380px;
-  overflow: auto;
-  perspective: 50em;
-}
-
-.garage-door {
-  position: absolute;
-  width: 100%;
-  height: 355px;
-  transition: 2s ease;
-}
-
-.open {
-  position: absolute;
-  top: 0;
-  height: 0;
-  transform: rotateX(40deg);
-}
-
-.controls {
-  width: 48%;
-  margin: 20px;
-}
-
 .open-btn,
-.close-btn {
+.close-btn,
+.sort-btn {
   padding: 5px 10px;
   margin: 0 10px;
   border-radius: 5px;
@@ -96,9 +72,80 @@ header h1 {
   font-weight: bold;
 }
 
-.item {
-  margin: 15px auto;
-  width: 80%;
+.sort-btn {
+  background-color: transparent;
+  border: 2px solid #DBE9EE;
+  color: #DBE9EE;
+}
+
+.sort-btn:hover {
+  background-color: #DBE9EE;
+  color: #2E5266;
+  font-weight: bold;
+}
+
+.item-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.item-count {
+  display: block;
+  margin: 0 10px;
+}
+
+/*********************
+       GARAGE
+*********************/
+
+.main-content {
+  display: flex;
+  padding: 0 2.5%;
+  background-color: #DBE9EE;
+}
+
+.garage {
+  position: relative;
+  width: 50%;
+  margin: 20px;
+  border: 25px solid #2E5266;
+  border-bottom: none;
+  border-radius: 3px;
+  background-image: url('../images/garage.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 380px;
+  overflow: auto;
+  perspective: 50em;
+}
+
+.garage-door {
+  position: absolute;
+  width: 100%;
+  height: 355px;
+  transition: 2s ease;
+  z-index: 3;
+}
+
+.open {
+  position: absolute;
+  top: 0;
+  height: 0;
+  transform: rotateX(40deg);
+}
+
+/*********************
+        FORM
+*********************/
+
+.controls {
+  width: 48%;
+  margin: 20px;
+  background-color: #2E5266;
+  border-radius: 3px;
 }
 
 .garage-form {
@@ -110,4 +157,96 @@ header h1 {
   display: block;
   margin: 20px 0;
   width: 100%;
+}
+
+.form-title {
+  color: #DBE9EE;
+  font-weight: bold;
+  text-align: center;
+}
+
+.item-input--name,
+.item-input--reason {
+  font-size: .9em;
+  padding: 5px;
+  border: 2px solid #DBE9EE;
+  border-radius: 3px;
+}
+
+.item-select {
+  font-size: .9em;
+  padding: 5px;
+}
+
+.add-item-btn {
+  padding: 10px 0;
+  border-radius: 3px;
+  border-style: none;
+  background-color: #DBE9EE;
+  color: #2E5266;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+/*********************
+     GARAGE ITEMS
+*********************/
+
+
+.item {
+  position: relative;
+  margin: 25px auto;
+  padding: 15px;
+  width: 85%;
+  background-color: #fff;
+  border-radius: 3px;
+  color: #2E5266;
+  cursor: pointer;
+}
+
+.inner-content {
+  display: none;
+  transition: all .25s;
+}
+
+.inner-content > * {
+  margin: 10px 0;
+}
+
+.reason {
+  overflow: auto;
+}
+
+.cleanliness {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expand {
+  display: block;
+}
+
+.delete-btn {
+  position: absolute;
+  padding: 0;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border-style: none;
+  cursor: pointer;
+}
+
+.delete {
+  height: 15px;
+  width: 15px;
+}
+
+.up-arrow {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  margin: 0;
+  height: 20px;
+  width: 20px;
 }

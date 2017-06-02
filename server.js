@@ -35,7 +35,10 @@ app.get('/api/v1/items', (request, response) => {
     .then(items => {
       response.status(200).json(items)
     })
-    .catch(error => response.status(500).send({ error: error }))
+    .catch(error => {
+      console.log(error);
+      response.status(404).send({ error: 'Route not found.' })
+    })
 });
 
 app.post('/api/v1/items', (request, response) => {
@@ -69,13 +72,26 @@ app.patch('/api/v1/items/:id', (request, response) => {
 app.delete('/api/v1/items/:id', (request, response) => {
   const { id } = request.params;
 
-  database('garage').where('id', id).del().returning('id')
+  if (!id) {
+    console.log('hi');
+  }
+
+  database('garage').where('id', id).select()
   .then(item => {
-    response.status(204).send('item has been deleted.');
+    if (!item.length) {
+      response.status(404).send('item not found.')
+    } else {
+      database('garage').where('id', id).del()
+      .then(item => {
+        response.status(204).send('item has been deleted.');
+      })
+    }
   })
   .catch(error => response.status(500).send({ error: error }));
-})
+});
 
 app.listen(app.get('port'), () => {
   console.log(`server running on port ${app.get('port')}`);
 });
+
+module.exports = app;

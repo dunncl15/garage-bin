@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test mocha",
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,9 @@
     "pg": "^6.2.3"
   },
   "devDependencies": {
+    "chai": "^4.0.1",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.4.2",
     "nodemon": "^1.11.0"
   }
 }
